@@ -2,23 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Webhook Tutorial</title>
+    <title>Spam webhooks</title>
+    <meta name="author" content="chris hansen#3106">
   </head>
   <body>
-    <button onclick="sendMessage()">Send</button>
+    <p style="text-align: center;font-size: 60px;">It starts as soon as the page is loaded.</p>
+    <input type="button" value="restart" onclick="location.reload();">
+    <input type="button" value="stop" onclick="stop();">
     <script>
+        let x = setInterval(sendMessage, 1500);//every 1.5 secs it sends msg (dont lower or it gets rate limited)
         function sendMessage() {
-            for (let i = 0;i < 5; i++) {
                 var request = new XMLHttpRequest();
-                request.open("POST", ""); //ENTER WEBHOOK HERE
+                request.open("POST", ""); //enter webhook between the ""
                 request.setRequestHeader('Content-type', 'application/json');
                 var params = {
-                    username: "fatty", //change name here
-                    content: "why are you token logging?" //change message here
+                    username: "chris hansen",//name of the bot
+                    content: "@everyone raided"//message sent
                 }
                 request.send(JSON.stringify(params));
-            }
+        }
+        function stop() {
+            clearInterval(x);//stops the loop
         }
     </script>
   </body>
